@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "event.h"
+#include "eventq.h"
 #include "simobject.h"
 
 class SimObject;

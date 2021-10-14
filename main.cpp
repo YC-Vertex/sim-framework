@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <iostream>
 
-#include "src/event.h"
-#include "src/simobject.h"
-#include "src/simulator.h"
-#include "src/types.h"
+#include "include/eventq.h"
+#include "include/simobject.h"
+#include "include/simulator.h"
+#include "include/types.h"
 
 using namespace std;
 

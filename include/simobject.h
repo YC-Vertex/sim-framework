@@ -1,7 +1,7 @@
 #ifndef __SIMOBJECT_H__
 #define __SIMOBJECT_H__
 
-#include "event.h"
+#include "eventq.h"
 #include "simulator.h"
 
 class Simulator;
@@ -24,7 +24,7 @@ private:
     int n;
 
 public:
-    SimpleObject(Simulator *s) : SimObject(s) { n = count; }
+    SimpleObject(Simulator *s) : SimObject(s) { n = count; count += 1; }
 
     void init();
 };

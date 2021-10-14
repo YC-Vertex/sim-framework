@@ -1,5 +1,5 @@
-#ifndef __EVENT_H__
-#define __EVENT_H__
+#ifndef __EVENTQ_H__
+#define __EVENTQ_H__
 
 #include <string>
 #include <functional>
@@ -43,8 +43,8 @@ private:
     EventFlag flag;
 
 public:
-    Event(Priority p = Default_Pri, EventFlag f = 0, const std::string &n = "")
-        : _tick(0), _priority(p), flag(f), _name(n),
+    Event(Priority p = Default_Pri, const std::string &n = "")
+        : _tick(0), _priority(p), _name(n),
           nextEvent(nullptr)
     { }
 
@@ -66,11 +66,10 @@ class EventFunctionWrapper : public Event
 {
 private:
     std::function<void(void)> callback;
-    std::string _name;
 
 public:
-    EventFunctionWrapper(const std::function<void(void)> &callback, Priority p = Default_Pri)
-        : Event(p), callback(callback)
+    EventFunctionWrapper(const std::function<void(void)> &callback, Priority p = Default_Pri, const std::string &n = "")
+        : Event(p, n), callback(callback)
     { }
 
     void execute() { callback(); }
@@ -100,6 +99,8 @@ public:
     void remove(Event *e);
     void remove(const std::string &name);
     bool empty() { return head == nullptr; }
+
+    void DEBUG_PRINT();
 };
 
 
@@ -110,7 +111,7 @@ private:
 
     Tick _curTick;
 
-    void updateTick();
+    bool updateTick(); // should be called at every indel
 
 public:
     EventQueue() : _head(nullptr), _curTick(0) { };
@@ -126,6 +127,8 @@ public:
     Tick curTick() { return _curTick; }
 
     void proceed();
+    
+    void DEBUG_PRINT();
 };
 
 
@@ -147,4 +150,4 @@ public:
     Tick curTick();
 };
 
-#endif // __EVENT_H__
+#endif // __EVENTQ_H__

@@ -19,6 +19,7 @@ void Simulator::initObj() {
     for (auto it = objList.begin(); it < objList.end(); ++it) {
         (*it)->init();
     }
+    _eventq->DEBUG_PRINT();
 }
 
 void Simulator::simulate() {
